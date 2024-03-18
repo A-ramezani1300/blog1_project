@@ -1,0 +1,29 @@
+{% extends 'parent/basa.html' %}
+{% block title %}profile{% endblock %}
+{% block content %}
+    <p><a href="{% url 'blog1:create_post' %}">ایجاد پست جدید</a></p>
+<table style="width: 100%; border: 3px solid brown ; text-align : right ; direction: rtl">
+    <tr>
+        <th>ردیف</th>
+        <th>پست</th>
+        <th>مشاهده</th>
+        <th>ویرایش</th>
+        <th>حذف</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>{{ forloop.counter}}</td>
+        <td>{{ post.title}}</td>
+        <td><a href="{{ post.get_absolute_url }}">{{ post.title}}</a></td>
+        <td><a href="{% url 'blog1:edit_post' post.id %}">ویرایش</a></td>
+        <td><a href="{% url 'blog1:delete_post' post.id %}">حذف</a></td>
+    </tr>
+    {% endfor %}
+    </table>
+        <br>
+        <a href="{% url 'blog1:password_change' %}">تغییر پسورد</a>
+        <br>
+        <a href="{% url 'blog1:logout' %}">خروج</a>
+        <br>
+{% endblock %}
+

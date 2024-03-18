@@ -1,0 +1,18 @@
+{% extends 'parent/basa.html' %}
+{% load blog1_tags %}
+{% block title %}post list{% endblock %}
+{% block content %}
+    <h2>آمار</h2>
+    <p>teadad posts: {% total_posts %} </p>
+    <p>teadad comment: {% total_comments %}</p>
+    <p>tarikh akharin post: {% last_post_data %}</p>
+
+    {% ltest_post 5 %}
+
+    <h2>محبوب ترین پست ها</h2>
+    {% most_popular_posts as pop_posts %}
+    {% for post in pop_posts %}
+        <br>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }} : with {{ post.comment_count }} comments</a>
+    {% endfor %}
+{% endblock %}

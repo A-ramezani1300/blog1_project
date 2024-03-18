@@ -1,0 +1,42 @@
+{% extends 'parent/basa.html' %}
+{% block title %}ticket form{% endblock %}
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+        نام و نام خانوادگی:
+    <input type="text" name="name" required>
+        <br>
+        ایمیل:
+    <input type="email" name="email">
+        <br>
+        شماره تماس:
+    <input type="text" name="phone" required maxlength="11">
+        <br>
+        متن پیام:
+    <textarea name="message"></textarea>
+        <br>
+    <select name="subject">
+        <option value="پیشنهاد">پیشنهادات</option>
+        <option value="انتقاد">انتقادات</option>
+        <option value="گزارش">گزارشات</option>
+    </select>
+        <br>
+    <input type="submit" value="ثبت تیکت">
+    </form>
+
+    {% if form.errors %}
+        لطفا خطاهای پیش امده اصلاح کنید!
+        <br>
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    {{ field.label }} : {{ error }}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
+{% endblock %}

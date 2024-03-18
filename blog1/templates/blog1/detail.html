@@ -1,0 +1,39 @@
+{% extends 'parent/basa.html' %}
+{% load jformat %}
+{% load blog1_tags %}
+{% block title %}post detail{% endblock %}
+{% block content %}
+    <h1>post detail (by {{ post.author }} </h1>
+    <h2>post.title</h2>
+    <p>{{ post.description | markdown }}</p>
+    <hr>
+    <p>{{ post.publish }}</p>
+    <hr>
+    <div>
+        {% for img in post.images.all %}
+            <img width="400" height="200" src="{{ img.image_field.url }}.url }}" alt="{{ img.title }}">
+        {% endfor %}
+
+    </div>
+    <div>
+    {% with comments.count as cm_count %}
+    {{ cm_count }} comment {{ cm_count|pluralize }}
+    </div>
+
+    <div>
+    {% for cm in comment %}
+        {{ cm.message | linebreaks }}
+        <br>
+        {{ cm.name }}
+    {% empty %}
+        کامنتی وجود ندارد
+    {% endfor %}
+    {% endwith %}
+    </div>
+    <form method="post" action="{% url 'blog1:post_comment' post.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="افزودن کامنت">
+    </form>
+{% endblock %}
+

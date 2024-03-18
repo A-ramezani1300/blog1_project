@@ -1,0 +1,13 @@
+{% for post in user_posts %}
+    <p>{{ post.title }}</p>
+    <p>{{ post.description }}</p>
+{% endfor %}
+<div class="pagination">
+   {% if page.has_previous %}
+    <a href="?page={{ page.previous_page_number }}">Previous</a>
+    {% endif %}
+    page {{ page.number }} of {{ page.paginator.num_pages }}
+    {% if page.has_next %}
+    <a href="?page={{ page.next_page_number }}">Next</a>
+    {% endif %}
+</div>

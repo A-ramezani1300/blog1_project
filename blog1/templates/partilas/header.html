@@ -1,0 +1,7 @@
+<form method="get" action="{% url 'blog1:post_search' %}">
+    {% csrf_token %}
+    <input type="text" name="query" required placeholder="کلمه مورد نظر وارد کنید...">
+    <input type="submit" value="جستجو">
+</form>
+
+<p><a href="{% url 'blog1:profile' %}">پروفایل</a></p>

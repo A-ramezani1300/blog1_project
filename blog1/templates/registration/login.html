@@ -1,0 +1,15 @@
+{% extends 'parent/basa.html' %}
+
+{% block title %}login{% endblock %}
+
+{% block content %}
+<h1>Login</h1>
+<p>login</p>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next }}">
+    <input type="submit" value="ورود">
+    </form>
+    <p> <a href="{% url 'blog1:password_reset' %}">آیا رمز خود را فراموش کرده اید</a></p>
+{% endblock %}

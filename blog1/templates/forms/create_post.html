@@ -1,0 +1,32 @@
+{% extends 'parent/basa.html' %}
+{% block title %}post form{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if post %}
+        {% for img in post.images.all %}
+            <img width="300px" height="300px" src="{{ img.image_field.url }}" alt="{{ img.title }}">
+            <a href="{% url 'blog1:delete_image' img.id %}">حذف تصویر</a>
+        {% endfor %}
+    {% endif %}
+<br>
+<br>
+    <input type="submit" value="تایید">
+</form>
+ {% if form.errors %}
+        لطفا خطاهای پیش امده اصلاح کنید!
+        <br>
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    {{ field.label }} : {{ error }}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'parent/basa.html' %}
+{% block title %}register done{% endblock %}
+{% block content %}
+<h1>{{ user }}</h1>
+<p>ثبت نام شما با موفقیت انجام شد</p>
+    <a href="{% url 'blog1:login' %}">ورود به وبسایت</a>
+{% endblock %}
